@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useWallet, useConnection } from '@solana/wallet-adapter-react';
 import { Keypair, SystemProgram, Transaction, LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js';
@@ -10,6 +10,13 @@ export default function Tansfer() {
     const { publicKey, sendTransaction } = useWallet();
     const [toWalletId, setToWalletId] = useState<string>('');
     const [solAmount, setSolAmount] = useState<number>(0);
+    const [accountBalance, setAccountBalance] = useState<number>(0);
+
+    useEffect(() => {
+        if(publicKey){
+            getSolBalance(publicKey);
+        }
+    },[publicKey]);
 
     const doTransaction = async (fromWalletParam: PublicKey, toWalletParam: string, amount: number) => {
         console.log(fromWalletParam)
@@ -26,13 +33,20 @@ export default function Tansfer() {
         } = await connection.getLatestBlockhashAndContext();
         const signature = await sendTransaction(transaction, connection, { minContextSlot })
         await connection.confirmTransaction({ blockhash, lastValidBlockHeight, signature });
+        getSolBalance(fromWalletParam);
+    }
+
+    const getSolBalance = async (fromWalletParam:PublicKey) =>{
+        const balance = await connection.getBalance(fromWalletParam)
+        setAccountBalance(balance/LAMPORTS_PER_SOL);
     }
 
     if (publicKey) {
         return (
             <div className={styles.description}>
 
-                <p>You have x SOL</p>
+                <p>You have {accountBalance} SOL</p>
+
                 <div>
                     <label htmlFor="toWalletId">Send SOL to:</label>
                     <input type="text" name="toWalletId" id="toWalletId" 
