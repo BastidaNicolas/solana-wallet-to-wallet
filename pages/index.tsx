@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import { useWallet, useConnection } from '@solana/wallet-adapter-react';
+import Transfer from 'components/transfer';
 
 const inter = Inter({ subsets: ['latin'] })
 const WalletDisconnectButtonDynamic = dynamic(
@@ -33,17 +34,15 @@ export default function Home() {
         </h1>
 
         <div className={styles.walletButtons}>
-          <WalletMultiButtonDynamic />
-          <WalletDisconnectButtonDynamic />
-        </div>
-
-        <div className={styles.description}>
-          {publicKey ?
-            <p>{publicKey.toString()}</p>
+          {!publicKey ?
+            <WalletMultiButtonDynamic />
             :
-            <p>not connected</p>
+            <WalletDisconnectButtonDynamic />
           }
-        </div>
+          </div>
+
+        <Transfer/>
+
       </main>
     </>
   )
