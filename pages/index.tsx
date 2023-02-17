@@ -18,7 +18,7 @@ const WalletMultiButtonDynamic = dynamic(
 
 export default function Home() {
   
-  const {publicKey, sendTransaction} = useWallet();
+  const {publicKey} = useWallet();
 
   return (
     <>
@@ -33,6 +33,8 @@ export default function Home() {
           Welcome to <a href="https://solana.com/">Solana!</a>
         </h1>
 
+        <Transfer/>
+
         <div className={styles.walletButtons}>
           {!publicKey ?
             <WalletMultiButtonDynamic />
@@ -40,9 +42,6 @@ export default function Home() {
             <WalletDisconnectButtonDynamic />
           }
           </div>
-
-        <Transfer/>
-
       </main>
     </>
   )
