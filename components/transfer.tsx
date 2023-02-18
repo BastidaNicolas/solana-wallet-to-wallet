@@ -74,10 +74,10 @@ export default function Tansfer() {
                     value={solAmount}
                 />
             </div>
-            {!loading ?
+            {!loading && publicKey ?
                 <button disabled={!toWalletId || !solAmount}
                     className='bg-violet-800 w-full py-2 text-lg rounded hover:bg-neutral-800 disabled:bg-neutral-800 disabled:text-gray-500'
-                    onClick={() => doTransaction(publicKey, toWalletId, solAmount)}
+                    onClick={() => doTransaction(publicKey, toWalletId, Number(solAmount))}
                 >
                     Send!
                 </button>
