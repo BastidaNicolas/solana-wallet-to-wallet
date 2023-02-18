@@ -1,3 +1,7 @@
+# Next.js Solana wallet-to-wallet
+
+![Next.js Solana wallet-to-wallet](https://user-images.githubusercontent.com/74965310/219899766-c816be12-a8e1-496f-9aa3-0b2e429f5420.png)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
