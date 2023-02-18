@@ -17,8 +17,8 @@ const WalletMultiButtonDynamic = dynamic(
 );
 
 export default function Home() {
-  
-  const {publicKey} = useWallet();
+
+  const { publicKey } = useWallet();
 
   return (
     <>
@@ -29,19 +29,19 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <h1 className={styles.title}>
+        <h1 className={`${styles.title} font-bold text-5xl sm:text-6xl`}>
           Welcome to <a href="https://solana.com/">Solana!</a>
         </h1>
 
-        <Transfer/>
+        <Transfer />
 
         <div className={styles.walletButtons}>
           {!publicKey ?
-            <WalletMultiButtonDynamic />
+            <WalletMultiButtonDynamic className='bg-violet-800'/>
             :
-            <WalletDisconnectButtonDynamic />
+            <WalletDisconnectButtonDynamic className='bg-violet-800'/>
           }
-          </div>
+        </div>
       </main>
     </>
   )
